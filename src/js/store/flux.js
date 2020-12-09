@@ -1,3 +1,5 @@
+const url = 'https://swapi.dev/api/people/';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -24,7 +26,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
 			},
-			changeColor: (index, color) => {
+			loadPeople: () => {
+				fetch(`${url}`)
+					.then(response => response.json())
+					.then(json => setStore({ "people" : json}))
+					.catch(error => console.log(error));
+			},
+				changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
 
